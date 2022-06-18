@@ -17,3 +17,8 @@
 1. `npm i express nodemon`
 2. `package.json`に`"dev": "nodemon app.js"`を追記
 3. `npm run dev`
+
+### mongoose, dotenv を導入
+
+1. `npm install mongoose`
+2. `npm install dotenv`
