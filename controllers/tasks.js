@@ -28,8 +28,14 @@ const getTask = async (req, res) => {
   }
 };
 
-const updateTask = (req, res) => {
-  res.send('ある特定のタスクを更新しました');
+const updateTask = async (req, res) => {
+  try {
+    const updatedTask = await Task.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true });
+    updatedTask || res.status(404).json(`_id:${req.params.id}は存在しません`);
+    res.status(200).json(updatedTask);
+  } catch (error) {
+    res.status(500).json(error);
+  }
 };
 
 const deleteTask = (req, res) => {
