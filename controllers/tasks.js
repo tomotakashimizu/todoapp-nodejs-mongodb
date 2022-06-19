@@ -38,8 +38,14 @@ const updateTask = async (req, res) => {
   }
 };
 
-const deleteTask = (req, res) => {
-  res.send('ある特定のタスクを削除しました');
+const deleteTask = async (req, res) => {
+  try {
+    const deletedTask = await Task.findOneAndDelete({ _id: req.params.id });
+    deletedTask || res.status(404).json(`_id:${req.params.id}は存在しません`);
+    res.status(200).json(deletedTask);
+  } catch (error) {
+    res.status(500).json(error);
+  }
 };
 
 module.exports = {
