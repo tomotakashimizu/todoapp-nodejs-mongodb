@@ -5,14 +5,11 @@ const showTasks = async () => {
   try {
     // 自作のAPIを叩いてタスクを取得
     const { data: tasks } = await axios.get('/api/v1/tasks');
-    console.log(tasks);
 
     // タスクを表示
     const taskNames = tasks
       .map((task) => {
-        console.log(task);
         const { _id, name, completed } = task;
-        console.log(name);
 
         return `
         <div class="single-task">
@@ -32,7 +29,6 @@ const showTasks = async () => {
       })
       .join('');
 
-    console.log(taskNames);
     tasksDOM.innerHTML = taskNames;
   } catch (error) {
     console.log(error);
