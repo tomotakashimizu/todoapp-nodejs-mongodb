@@ -1,5 +1,7 @@
 const taskIDDOM = document.querySelector('.task-edit-id');
 const taskNameDOM = document.querySelector('.task-edit-name');
+const formDOM = document.querySelector('.single-task-form');
+const formAlertDOM = document.querySelector('.form-alert');
 
 const params = window.location.search;
 const id = new URLSearchParams(params).get('id');
@@ -19,3 +21,22 @@ const showTask = async () => {
 };
 
 showTask();
+
+formDOM.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  try {
+    const taskName = taskNameDOM.value;
+    await axios.patch(`/api/v1/tasks/${id}`, {
+      name: taskName,
+    });
+    formAlertDOM.style.display = 'block';
+    formAlertDOM.innerHTML = 'タスクを編集しました。';
+    formAlertDOM.classList.add('text-success');
+  } catch (error) {
+    console.log(error);
+  }
+  setTimeout(() => {
+    formAlertDOM.style.display = 'none';
+  }, 3000);
+});
