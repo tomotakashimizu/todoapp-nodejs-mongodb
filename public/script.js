@@ -8,6 +8,11 @@ const showTasks = async () => {
     // 自作のAPIを叩いてタスクを取得
     const { data: tasks } = await axios.get('/api/v1/tasks');
 
+    if (tasks.length < 1) {
+      tasksDOM.innerHTML = `<h5 class="empty-list">タスクがありません</h5>`;
+      return;
+    }
+
     // タスクを表示
     const taskNames = tasks
       .map((task) => {
