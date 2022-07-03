@@ -20,7 +20,7 @@ const showTasks = async () => {
         const { _id, name, completed } = task;
 
         return `
-        <div class="single-task">
+        <div class="single-task ${completed && 'task-completed'}">
           <h5>
             <span><i class="far fa-check-circle"></i></span>
             ${name}
